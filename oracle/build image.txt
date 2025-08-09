@@ -1,0 +1,2 @@
+docker pull container-registry.oracle.com/database/free:latest
+docker run -d --name oracle-free -p 1521:1521 -p 5500:5500 -e ORACLE_PWD=Oracle123 -e ORACLE_CHARACTERSET=AL32UTF8 container-registry.oracle.com/database/free:latest

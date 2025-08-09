@@ -1,0 +1,20 @@
+server:
+  port: 8762
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+gateway:
+  dynamic-routes:
+    auth:
+      path: /authenticate-service/**
+      url: ${AUTHENTICATE_URL:http://localhost:8081}
+    order:
+      path: /product-service/**
+      url: ${ORDER_URL:http://localhost:8082}

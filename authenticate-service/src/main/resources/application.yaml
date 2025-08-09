@@ -1,0 +1,37 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /authenticate-service
+
+spring:
+  application:
+      name: authenticate-service
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/nbva_shop
+    username: nbva
+    password: Va1722002
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/nbva-realm
+
+keycloak:
+  auth-server-url: http://localhost:8080
+  realm: nbva-realm
+  resource: nbva-app
+  credentials:
+    secret: wzHmmnm3gIAODdsKeokwf1EP848YSvVH
+  username: nbva
+  password: Va1722002
+  bearer-only: true
+  ssl-required: none
+  use-resource-role-mappings: true
+  cors: true
