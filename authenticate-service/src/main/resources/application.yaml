@@ -22,6 +22,8 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8080/realms/nbva-realm
+  cache:
+    type: redis
 
 keycloak:
   auth-server-url: http://localhost:8080
@@ -35,3 +37,7 @@ keycloak:
   ssl-required: none
   use-resource-role-mappings: true
   cors: true
+
+redis:
+  host: localhost
+  port: 6379

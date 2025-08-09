@@ -11,6 +11,7 @@ import com.nbva.authenticate.domain.entity.UserEntity;
 import com.nbva.authenticate.domain.repository.UserRepository;
 import com.nbva.authenticate.infrastructure.dto.UserInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -23,8 +24,9 @@ public class AuthenticateServiceImpl implements AuthenticateService {
 
     private final UserInfo userInfo;
 
+    @Cacheable(value = "userinfo", key = "#username")
     @Override
-    public UserInfoResponse getUserinfo() {
+    public UserInfoResponse getUserinfo(String username) {
         UserInfoResponse userInfoResponse = new UserInfoResponse();
         userInfoResponse.setUsername(userInfo.getUsername());
         userInfoResponse.setAuthorities(userInfo.getAuthorities());
