@@ -1,13 +1,13 @@
 package com.nbva.authenticate.api.controller;
 
 import com.nbva.authenticate.api.AuthenticateAPI;
-import com.nbva.authenticate.api.dto.BaseResponse;
 import com.nbva.authenticate.api.dto.request.RegisterUserRequest;
+import com.nbva.authenticate.api.dto.response.SuccessResponse;
 import com.nbva.authenticate.application.service.AuthenticateService;
 import com.nbva.authenticate.api.dto.response.UserInfoResponse;
+import com.nbva.authenticate.infrastructure.dto.UserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,14 +17,14 @@ public class AuthenticateController implements AuthenticateAPI {
     private final AuthenticateService authenticateService;
 
     @Override
-    public ResponseEntity<BaseResponse<UserInfoResponse>> getUserinfo(String username) {
-        return ResponseEntity.ok(BaseResponse.success(authenticateService.getUserinfo(username)));
+    public ResponseEntity<SuccessResponse<UserInfoResponse>> getUserinfo(UserInfo userInfo) {
+        return ResponseEntity.ok(new SuccessResponse<>(authenticateService.getUserinfo(userInfo)));
     }
 
     @Override
-    public ResponseEntity<BaseResponse<Void>> register(RegisterUserRequest registerUserRequest) {
+    public ResponseEntity<SuccessResponse<Void>> register(RegisterUserRequest registerUserRequest) {
         authenticateService.registerUser(registerUserRequest);
-        return ResponseEntity.ok(BaseResponse.success());
+        return ResponseEntity.ok(new SuccessResponse<>());
     }
 
 }

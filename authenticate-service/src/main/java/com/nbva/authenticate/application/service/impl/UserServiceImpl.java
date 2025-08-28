@@ -7,6 +7,7 @@ import com.nbva.authenticate.application.service.UserService;
 import com.nbva.authenticate.domain.entity.UserEntity;
 import com.nbva.authenticate.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -20,6 +21,15 @@ public class UserServiceImpl implements UserService {
     public UserDTO createUser(CreateUserDTO createUserDTO) {
         UserEntity userEntity = userMapper.createUserDTOToEntity(createUserDTO);
         userEntity = userRepository.createUser(userEntity);
+        return userMapper.entityToDTO(userEntity);
+    }
+
+    @Override
+    public UserDTO findByUsername(String username) {
+        UserEntity userEntity = userRepository.findUserByUsername(username);
+        if (userEntity == null) {
+            return null; // or throw an exception if preferred
+        }
         return userMapper.entityToDTO(userEntity);
     }
 }

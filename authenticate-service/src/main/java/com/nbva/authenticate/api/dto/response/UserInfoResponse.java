@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class UserInfoResponse implements Serializable {
-    private String userId;
+    private String id;
     private String username;
     private List<? extends GrantedAuthority> authorities;
     private String token;

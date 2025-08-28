@@ -1,10 +1,9 @@
 package com.nbva.product.application.service;
 
-import com.nbva.product.api.dto.request.ProductListRequest;
-import com.nbva.product.api.dto.response.ProductListResponse;
-
-import java.util.List;
+import com.nbva.common.dto.PageResponse;
+import com.nbva.product.api.dto.product.request.PageProductRequest;
+import com.nbva.product.api.dto.product.response.ProductPageResponse;
 
 public interface ProductService {
-    List<ProductListResponse> getProducts(ProductListRequest productListRequest);
+    PageResponse<ProductPageResponse> getPageProduct(PageProductRequest pageProductRequest);
 }

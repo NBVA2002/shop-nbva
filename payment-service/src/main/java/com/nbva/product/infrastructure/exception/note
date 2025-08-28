@@ -1,0 +1,13 @@
+Infrastructure Exceptions (Technical Exceptions)
+
+👉 Đặt trong infrastructure.exception
+
+Liên quan đến kỹ thuật: database, mạng, I/O, message broker...
+
+Ví dụ:
+
+DatabaseConnectionException
+
+FileStorageException
+
+KafkaPublishException

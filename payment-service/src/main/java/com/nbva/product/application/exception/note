@@ -1,0 +1,15 @@
+Application Exceptions
+
+👉 Đặt trong application.exception
+
+Dùng cho các lỗi liên quan đến use case orchestration (thực thi nghiệp vụ ở tầng application).
+
+Không đi sâu vào logic nghiệp vụ, mà là các vấn đề về điều phối, như:
+
+Một lệnh (command) không hợp lệ.
+
+Request bị thiếu dữ liệu bắt buộc.
+
+Một workflow không thể tiếp tục.
+
+dùng validate request

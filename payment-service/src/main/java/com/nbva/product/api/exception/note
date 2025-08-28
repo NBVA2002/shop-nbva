@@ -1,0 +1,13 @@
+Presentation (API) Exceptions
+
+👉 Thường nằm trong infrastructure.adapter.rest.exception
+
+Đây là adapter level, dùng để ánh xạ từ exception của domain/application/infrastructure → HTTP response.
+
+Ví dụ:
+
+NotFoundException → HTTP 404
+
+DuplicateSanPhamCodeException → HTTP 400
+
+Thường thì bạn có GlobalExceptionHandler ở đây.

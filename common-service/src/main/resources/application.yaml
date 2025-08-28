@@ -1,0 +1,16 @@
+spring:
+#  datasource:
+#    url: jdbc:oracle:thin:@localhost:1521/nbva_shop
+#    username: nbva
+#    password: Va1722002
+#    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+config:
+  gateway:
+    url: http://localhost:8762

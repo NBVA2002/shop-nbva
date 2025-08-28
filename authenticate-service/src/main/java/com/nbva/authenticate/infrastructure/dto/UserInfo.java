@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 @Data
 public class UserInfo {
+    private String id;
     private String username;
     private List<? extends GrantedAuthority> authorities;
     private String token;

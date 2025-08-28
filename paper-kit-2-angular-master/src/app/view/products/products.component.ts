@@ -1,0 +1,28 @@
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from './product.service';
+
+@Component({
+    selector: 'app-landing',
+    templateUrl: './products.component.html',
+    styleUrls: ['./products.component.scss']
+})
+
+export class ProductsComponent implements OnInit {
+  userInfo: any;
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    const token = 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjRVNMR2hGRW9VNk9VUlpSX3NNZDN6Y0pDaS1mQmRhbHV5VWlDMk5HRWJnIn0.eyJleHAiOjE3NTQ3NjM3NjEsImlhdCI6MTc1NDc2MTk2MSwianRpIjoiMDFjNGYzNjYtNWQzMi00MTVjLWI1MmUtZjM4YzI0NzI3YzEwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9uYnZhLXJlYWxtIiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJicm9rZXIiLCJhY2NvdW50Il0sInN1YiI6ImQ1Y2ViNGU0LTdlNGYtNDlkZC1hMGIyLWVmZDM3MzczODI4NCIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5idmEtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjhlYzk2M2M3LTA1NzUtNDA0OS1hYjc0LTk3MDZlYzgxYTAxNyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW5idmEtcmVhbG0iLCJST0xFX1VTRVIiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfQURNSU4iLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy1yZWFsbSIsInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJyZWFsbS1hZG1pbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsInZpZXctZ3JvdXBzIiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJkZWxldGUtYWNjb3VudCIsIm1hbmFnZS1jb25zZW50Iiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInNpZCI6IjhlYzk2M2M3LTA1NzUtNDA0OS1hYjc0LTk3MDZlYzgxYTAxNyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6Ik5ndXnhu4VuIELDoSBWaeG7h3QgQW5oIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibmJ2YSIsImdpdmVuX25hbWUiOiJOZ3V54buFbiBCw6EiLCJmYW1pbHlfbmFtZSI6IlZp4buHdCBBbmgifQ.mwGEMZ55ILiJnOmnXRat-jBB9w6aQlbFDaOIFZ5nF6ut-TI2nMUDOBeduBGKGon33lqFI4Xh-NSGpZeMLUw_6X4I_jneBZ8a1VP7563TrbOQWQWFltZ3zzYvzvlmLFVDaveY3pUmTc8c90bSyeRu5StMbwLjQdmXpJjjoNtMNwfQ3wfdOSyytME2YE1nZWaGmtX11kilgoVtYGFSgJROFC_kw0LzGoHsYBOFFXaPQYZHNe32NqKTjgFujfheqOm0q2JknPnOU19bIiX2M5lRLRrW2wVGKZuRFli2qxIvmVgH1-j_kof-2nCTMO_yt3k3W41MLiYMmbF4O4Ix89lqjQ'; // lấy từ localStorage hoặc AuthService
+
+    this.productService.getUserInfo(token).subscribe({
+      next: (data) => {
+        this.userInfo = data;
+        console.log('User Info:', data);
+      },
+      error: (err) => {
+        console.error('Error:', err);
+      }
+    });
+  }
+}

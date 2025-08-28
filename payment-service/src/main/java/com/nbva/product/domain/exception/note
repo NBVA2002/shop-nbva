@@ -1,0 +1,9 @@
+Domain Exceptions (Business Exceptions)
+
+👉 Đặt trong domain.exception
+
+Dùng để biểu diễn các vi phạm quy tắc nghiệp vụ (business rules).
+
+Chỉ liên quan đến ngữ nghĩa nghiệp vụ chứ không liên quan đến hạ tầng hay kỹ thuật.
+
+lỗi dup bản ghi, không tồn tại,...

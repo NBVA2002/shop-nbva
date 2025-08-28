@@ -1,5 +1,7 @@
 package com.nbva.authenticate.infrastructure.config;
 
+import com.nbva.authenticate.application.dto.UserDTO;
+import com.nbva.authenticate.application.service.UserService;
 import com.nbva.authenticate.infrastructure.dto.UserInfo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,7 @@ import org.keycloak.util.JsonSerialization;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,11 +27,13 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 
+@Primary
 @RequiredArgsConstructor
 @Configuration
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     private final ObjectFactory<UserInfo> userInfoFactory;
+    private final UserService userService;
 
     @Value("${keycloak.resource}")
     private String resource;
@@ -58,11 +63,13 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 .map(SimpleGrantedAuthority::new).toList();
 
         UserInfo userInfo = userInfoFactory.getObject();
+        UserDTO userDTO = userService.findByUsername(username);
+        userInfo.setId(userDTO.getId());
         userInfo.setUsername(username);
         userInfo.setAuthorities(authorities);
         userInfo.setToken(token);
 
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, token, authorities);
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userInfo, token, authorities);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
