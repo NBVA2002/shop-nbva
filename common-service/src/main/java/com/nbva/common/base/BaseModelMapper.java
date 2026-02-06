@@ -1,4 +1,4 @@
-package com.nbva.product.common.base;
+package com.nbva.common.base;
 
 import org.modelmapper.ModelMapper;
 
@@ -6,14 +6,14 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class BaseMapper<D extends BaseDTO, E extends BaseEntity> {
+public abstract class BaseModelMapper<D extends BaseDTO, E extends BaseEntity> {
 
     protected final ModelMapper modelMapper;
     private final Class<E> entityClass;
     private final Class<D> dtoClass;
 
     @SuppressWarnings("unchecked")
-    protected BaseMapper(ModelMapper modelMapper) {
+    protected BaseModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
 
         ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
