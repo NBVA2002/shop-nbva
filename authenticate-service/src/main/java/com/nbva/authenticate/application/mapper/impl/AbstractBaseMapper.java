@@ -2,7 +2,7 @@ package com.nbva.authenticate.application.mapper.impl;
 
 import com.nbva.authenticate.application.dto.BaseDTO;
 import com.nbva.authenticate.application.mapper.BaseMapper;
-import com.nbva.authenticate.domain.entity.BaseEntity;
+import com.nbva.common.base.BaseEntity;
 import org.modelmapper.ModelMapper;
 
 public abstract class AbstractBaseMapper<D extends BaseDTO, E extends BaseEntity> implements BaseMapper<D, E> {

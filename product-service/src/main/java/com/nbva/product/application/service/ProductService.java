@@ -1,9 +1,10 @@
 package com.nbva.product.application.service;
 
-import com.nbva.common.dto.PageResponse;
-import com.nbva.product.api.dto.product.request.PageProductRequest;
-import com.nbva.product.api.dto.product.response.ProductPageResponse;
+import com.nbva.common.dto.PageDTO;
+import com.nbva.product.presentation.dto.product.request.ProductPageRequest;
+import com.nbva.product.presentation.dto.product.response.ProductPageDTO;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
-    PageResponse<ProductPageResponse> getPageProduct(PageProductRequest pageProductRequest);
+    PageDTO<ProductPageDTO> getPageProduct(Pageable pageable, ProductPageRequest request);
 }

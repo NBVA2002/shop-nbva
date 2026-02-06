@@ -1,6 +1,6 @@
 package com.nbva.product.domain.exception;
 
-import com.nbva.product.common.base.BaseException;
+import com.nbva.common.base.BaseException;
 
 public class NotFoundException extends BaseException {
 

@@ -1,5 +1,6 @@
 package com.nbva.authenticate.domain.entity;
 
+import com.nbva.common.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -12,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "\"User\"")
+@Table(name = "users")
 @Entity
 public class UserEntity extends BaseEntity {
 
-    @Column(name = "\"username\"")
+    @Column(name = "username")
     private String username;
 }

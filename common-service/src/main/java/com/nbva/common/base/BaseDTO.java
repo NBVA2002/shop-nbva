@@ -1,25 +1,28 @@
 package com.nbva.common.base;
 
 import java.time.LocalDateTime;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@FieldDefaults(level = AccessLevel.PROTECTED)
 public class BaseDTO {
-    protected String id;
+    String id;
 
-    private LocalDateTime createdDate;
+    LocalDateTime createdDate;
 
-    private LocalDateTime updatedDate;
+    LocalDateTime updatedDate;
 
-    private String createdUser;
+    String createdUser;
 
-    private String updatedUser;
+    String updatedUser;
 
-    private Integer version;
+    Integer version;
 
-    private Boolean isDel;
+    Boolean isDel;
 }

@@ -1,6 +1,7 @@
 package com.nbva.product.infrastructure.repository.impl;
 
-import com.nbva.product.api.dto.product.request.PageProductRequest;
+import com.nbva.product.presentation.dto.product.request.ProductPageRequest;
+import com.nbva.common.base.BaseEntity_;
 import com.nbva.product.domain.entity.ProductEntity;
 import com.nbva.product.domain.entity.ProductEntity_;
 import com.nbva.product.infrastructure.repository.JpaProductCustomRepository;
@@ -22,36 +23,37 @@ public class JpaProductCustomRepositoryImpl implements JpaProductCustomRepositor
     private final EntityManager entityManager;
 
     @Override
-    public Page<ProductEntity> getPageProduct(PageProductRequest pageProductRequest) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
-        CriteriaQuery<ProductEntity> cq = cb.createQuery(ProductEntity.class);
-        Root<ProductEntity> root = cq.from(ProductEntity.class);
-
-        // where
-        Predicate isDel = cb.isFalse(root.get(ProductEntity_.isDel));
-
-        // Tạo query
-        cq.select(root).where(isDel);
-        TypedQuery<ProductEntity> query = entityManager.createQuery(cq);
-
-        // Phân trang
-        query.setFirstResult(pageProductRequest.getPageNumber() * pageProductRequest.getPageSize());   // offset
-        query.setMaxResults(pageProductRequest.getPageSize());           // limit
-
-        // Lấy dữ liệu
-        List<ProductEntity> result = query.getResultList();
-
-        // Query count
-        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<ProductEntity> countRoot = countQuery.from(ProductEntity.class);
-        Predicate isDelCount = cb.isFalse(countRoot.get(ProductEntity_.isDel));
-        countQuery.select(cb.count(countRoot)).where(isDelCount);
-
-        Long totalElements = entityManager.createQuery(countQuery).getSingleResult();
-
-        // Trả về Page
-        return new PageImpl<>(result, pageProductRequest.toPageable(), totalElements);
+    public Page<ProductEntity> getPageProduct(ProductPageRequest productPageRequest) {
+//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//
+//        CriteriaQuery<ProductEntity> cq = cb.createQuery(ProductEntity.class);
+//        Root<ProductEntity> root = cq.from(ProductEntity.class);
+//
+//        // where
+//        Predicate isDel = cb.isFalse(root.get(BaseEntity_.isDel));
+//
+//        // Tạo query
+//        cq.select(root).where(isDel);
+//        TypedQuery<ProductEntity> query = entityManager.createQuery(cq);
+//
+//        // Phân trang
+//        query.setFirstResult(productPageRequest.getPageNumber() * productPageRequest.getPageSize());   // offset
+//        query.setMaxResults(productPageRequest.getPageSize());           // limit
+//
+//        // Lấy dữ liệu
+//        List<ProductEntity> result = query.getResultList();
+//
+//        // Query count
+//        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+//        Root<ProductEntity> countRoot = countQuery.from(ProductEntity.class);
+//        Predicate isDelCount = cb.isFalse(countRoot.get(ProductEntity_.isDel));
+//        countQuery.select(cb.count(countRoot)).where(isDelCount);
+//
+//        Long totalElements = entityManager.createQuery(countQuery).getSingleResult();
+//
+//        // Trả về Page
+//        return new PageImpl<>(result, productPageRequest.toPageable(), totalElements);
+        return null;
     }
 
 //    public Page<ProductEntity> hasStatus(Pageable pageable) {

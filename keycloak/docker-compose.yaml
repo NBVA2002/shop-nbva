@@ -10,3 +10,18 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+
+      # 🌍 URL public cho browser
+      KC_HOSTNAME_URL: http://localhost:8080
+      KC_HOSTNAME_ADMIN_URL: http://localhost:8080
+      
+    networks:
+      - nbva-network
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+      
+volumes:
+  keycloak-data:
+networks:
+  nbva-network:
+    external: true

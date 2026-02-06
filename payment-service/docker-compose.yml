@@ -1,0 +1,16 @@
+services:
+  payment-service:
+    image: payment-service:latest
+    ports:
+      - "8084:8084"
+    environment:
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+      DATASOURCE_URL: jdbc:oracle:thin:@oracle-db:1521/FREEPDB1
+      KEYCLOAK_URL: http://keycloak:8080
+    networks:
+      - nbva-network
+
+networks:
+  nbva-network:
+    external: true
+# docker compose up -d --build

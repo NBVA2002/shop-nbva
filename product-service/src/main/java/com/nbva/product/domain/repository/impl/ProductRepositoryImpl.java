@@ -1,6 +1,6 @@
 package com.nbva.product.domain.repository.impl;
 
-import com.nbva.product.api.dto.product.request.PageProductRequest;
+import com.nbva.product.presentation.dto.product.request.ProductPageRequest;
 import com.nbva.product.domain.entity.ProductEntity;
 import com.nbva.product.domain.repository.ProductRepository;
 import com.nbva.product.infrastructure.repository.JdbcProductRepository;
@@ -21,13 +21,13 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final JdbcProductRepository jdbcProductRepository;
 
     @Override
-    public Page<ProductEntity> getPageProduct(PageProductRequest pageProductRequest) {
-        return jpaProductCustomRepository.getPageProduct(pageProductRequest);
+    public Page<ProductEntity> getPageProduct(ProductPageRequest productPageRequest) {
+        return jpaProductCustomRepository.getPageProduct(productPageRequest);
     }
 
     @Override
-    public List<ProductEntity> getListProduct(PageProductRequest pageProductRequest) {
-        return jdbcProductRepository.getProducts(pageProductRequest);
+    public List<ProductEntity> getListProduct(ProductPageRequest productPageRequest) {
+        return jdbcProductRepository.getProducts(productPageRequest);
     }
 
 }

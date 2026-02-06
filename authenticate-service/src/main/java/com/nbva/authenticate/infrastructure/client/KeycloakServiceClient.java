@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "KeycloakServiceClient", url = "http://localhost:8080")
+@FeignClient(name = "KeycloakServiceClient", url = "${keycloak.auth-server-url}")
 public interface KeycloakServiceClient {
     @GetMapping(value = "/realms/nbva-realm/protocol/openid-connect/userinfo", consumes = "application/json")
     KeycloakUserInfo getUserInfo(@RequestHeader(HttpHeaders.AUTHORIZATION) String accessToken);

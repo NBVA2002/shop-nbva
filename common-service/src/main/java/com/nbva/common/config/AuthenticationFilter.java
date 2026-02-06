@@ -1,18 +1,20 @@
 package com.nbva.common.config;
 
 import com.nbva.common.client.AuthenticateServiceClient;
-import com.nbva.common.client.dto.UserInfoDTO;
-import com.nbva.common.dto.CurrentUserDTO;
+import com.nbva.common.client.dto.UserInfoRequest;
+import com.nbva.common.dto.UserContext;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -23,7 +25,6 @@ import java.io.IOException;
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     private final AuthenticateServiceClient authenticateServiceClient;
-    private final ObjectFactory<CurrentUserDTO> userInfoFactory;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
@@ -34,23 +35,18 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        UserInfoDTO userInfoDTO = authenticateServiceClient.getUserInfo(token).getData();
-        CurrentUserDTO currentUserDTO = userInfoFactory.getObject();
-        mapUserInfoFromUserInfoDTO(userInfoDTO, currentUserDTO);
+        UserInfoRequest userInfoRequest = new UserInfoRequest(request.getMethod(), request.getRequestURI(), token);
+        UserContext userContext = authenticateServiceClient.getUserInfo(userInfoRequest).getData();
+
+        List<SimpleGrantedAuthority> authorities = userContext.getRoles().stream()
+            .map(SimpleGrantedAuthority::new).toList();
 
         UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(userInfoDTO.getUsername(), token, userInfoDTO.getAuthoritiess());
+                new UsernamePasswordAuthenticationToken(userContext, token, authorities);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         filterChain.doFilter(request, response);
-    }
-
-    private void mapUserInfoFromUserInfoDTO(UserInfoDTO userInfoDTO, CurrentUserDTO currentUserDTO) {
-        currentUserDTO.setId(currentUserDTO.getId());
-        currentUserDTO.setUsername(currentUserDTO.getUsername());
-        currentUserDTO.setAuthorities(userInfoDTO.getAuthoritiess());
-        currentUserDTO.setToken(userInfoDTO.getToken());
     }
 
 }

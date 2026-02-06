@@ -26,7 +26,7 @@ public class SecurityConfig {
             .httpBasic(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(regexMatcher(".*/public")).permitAll()
-                .anyRequest().authenticated())
+                .anyRequest().permitAll())
             .build();
     }
 

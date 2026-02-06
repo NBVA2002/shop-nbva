@@ -7,9 +7,9 @@ spring:
   application:
       name: authenticate-service
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521/nbva_shop
-    username: nbva
-    password: Va1722002
+    url: ${DATASOURCE_URL:jdbc:oracle:thin:@localhost:1521/FREEPDB1}
+    username: ${DATASOURCE_USERNAME:users}
+    password: ${DATASOURCE_USERNAME:Va1722002}
     driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     hibernate:
@@ -26,13 +26,13 @@ spring:
     type: redis
 
 keycloak:
-  auth-server-url: http://localhost:8080
+  auth-server-url: ${KEYCLOAK_URL:http://localhost:8080}
   realm: nbva-realm
   resource: nbva-app
   credentials:
     secret: wzHmmnm3gIAODdsKeokwf1EP848YSvVH
-  username: nbva
-  password: Va1722002
+    username: nbva
+    password: Va1722002
   bearer-only: true
   ssl-required: none
   use-resource-role-mappings: true
@@ -45,5 +45,5 @@ redis:
 config:
   gateway:
     url: http://localhost:8762
-  endpoint:
-    url:
+  authenticate:
+    url: ${AUTHENTICATE_URL:http://localhost:8081}

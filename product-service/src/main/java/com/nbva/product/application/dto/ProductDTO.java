@@ -1,6 +1,6 @@
 package com.nbva.product.application.dto;
 
-import com.nbva.product.common.base.BaseDTO;
+import com.nbva.common.base.BaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
